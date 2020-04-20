@@ -1,0 +1,69 @@
+<?php
+$xml=simplexml_load_file("note.xml");
+echo $xml->ember[0]->to."<br>";
+foreach($xml->children() as $men)
+{
+	echo $men->to."<br>";
+	echo $men->from."<br>";
+	echo $men->heading."<br>";
+	echo $men->body."<br>";
+	
+}
+//************************************
+$munkasok=array(); //munkasok=worker
+$munkasok[]=array(
+"nev"=>"Zoltan", //név=name
+"kor"=>49,  //kor=age
+"kereset"=> 1500000 //kereset=payment
+);
+$munkasok[]=array(
+"nev"=>"Eva",
+"kor"=>23,
+"kereset"=>450000 
+);
+$doc=new DOMDocument();
+$doc->formatOutput=true;
+$r=$doc->createElement("munkasok"); //make root element
+$doc->appendChild($r); //make first child element
+foreach($munkasok as $ember) //munkasok=worker ember=men
+{
+	$b=$doc->createElement("ember");
+	
+	$name=$doc->createElement("nev");
+	$name->appendChild($doc->createTextNode($ember['nev']));
+	$b->appendChild($name);
+	
+	$age=$doc->createElement("kor");
+	$age->appendChild($doc->createTextNode($ember['kor']));
+	$b->appendChild($age);
+	
+	$salary=$doc->createElement("kereset");
+	$salary->appendChild($doc->createTextNode($ember['kereset']));
+	$b->appendChild($salary);
+	
+	$r->appendChild($b);
+}
+echo $doc->saveXML();
+$doc->save("../tmp/worker.xml");
+//************************************************
+ echo"<br>*************************<br>";
+ $doc2=new DOMDocument();
+ $doc2->load("../tmp/worker.xml");
+ $emberek=$doc2->getElementsByTagName("ember");
+ foreach($emberek as $melos) //melos=worker 
+ {
+	 $neve=$melos->getElementsByTagName("nev");
+	 $nev=$neve->item(0)->nodeValue;
+	 
+	 $kora=$melos->getElementsByTagName("kor");
+	 $kor=$kora->item(0)->nodeValue;
+	 
+	 $keresete=$melos->getElementsByTagName("kereset");
+	 $kereset=$keresete->item(0)->nodeValue;
+	 
+	 echo "<br> $nev - $kor - $kereset";
+ }
+
+
+
+?>
