@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<note>
+<ember>
+	<to>001</to>
+	<from>Jani</from>
+	<heading>worker</heading>
+	<body>workplace: A01 </body>
+</ember>
+<ember>
+	<to>002</to>
+	<from>Karesz</from>
+	<heading>worker</heading>
+	<body>workplace: A02</body>
+</ember>
+</note>
